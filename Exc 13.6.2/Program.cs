@@ -1,4 +1,7 @@
-﻿namespace Exc_13._6._2
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace Exc_13._6._2
 {
     internal class Program
     {
@@ -6,7 +9,7 @@
         {
             string text = File.ReadAllText(@"C:\Users\lino-\OneDrive\Рабочий стол\Text1.txt");
             var noPunctuationText = new string(text.Where(c => !char.IsPunctuation(c)).ToArray());
-            GetQuantityofWords(noPunctuationText);
+            GetTenMostUsedWords(GetQuantityofWords(noPunctuationText));
 
         }
 
@@ -35,7 +38,18 @@
             }
             return quantityOfWords;
         }
-
-     
+        
+        static void GetTenMostUsedWords(Dictionary<string, int> words)
+        {
+            var sortedDict = from entry in words orderby entry.Value descending select entry;
+            int counter = 0;
+            foreach (var word in sortedDict)
+            {
+                counter++;
+                Console.WriteLine($"Слово {word.Key}, использовано {word.Value}");
+                if (counter >= 10)
+                    break;
+            }
+        }
     }
 }
