@@ -19,12 +19,12 @@ namespace Exc_13._6._2
             var uniqueWords = new HashSet<string>();
             var quantityOfWords = new Dictionary<string, int>();
             int counter;
-            foreach (string word in words)
+            foreach (string word in words) // получаем уникальные слова
             {
                 uniqueWords.Add(word);
             }
             
-            foreach (string word in uniqueWords)
+            foreach (string word in uniqueWords) // находим уникальное слово в тексте, получаем частоту его использование в переменную counter и добавляем его в словарь.
             {
                 counter = 0;
                 for (int i = 0; i < words.Length; i++)
@@ -34,16 +34,16 @@ namespace Exc_13._6._2
                         counter++;
                     }
                 }
-                quantityOfWords.Add(word, counter);
+                quantityOfWords.Add(word, counter); 
             }
             return quantityOfWords;
         }
         
         static void GetTenMostUsedWords(Dictionary<string, int> words)
         {
-            var sortedDict = from entry in words orderby entry.Value descending select entry;
+            var sortedDict = from entry in words orderby entry.Value descending select entry; // сортируем словарь по частоте использования слов (по убыванию)
             int counter = 0;
-            foreach (var word in sortedDict)
+            foreach (var word in sortedDict) // выводим в консоль первые десять значений отсортированного словаря.
             {
                 counter++;
                 Console.WriteLine($"Слово {word.Key}, использовано {word.Value}");
